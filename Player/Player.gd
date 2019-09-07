@@ -94,13 +94,21 @@ func _fire():
 			var bullet = Bullet.instance()
 			bullet.direction = firing_direction
 			var lpre = ""
+			
+			if firing_direction == "left":
+				bullet.set_rotation_degrees(180)
+			elif firing_direction == "up":
+				bullet.set_rotation_degrees(-90)
+			elif firing_direction == "down":
+				bullet.set_rotation_degrees(90)
+			
 			if firing_direction != "left" and firing_direction != "right":
 				if lstatus == S.LLeft:
 					lpre = "left_"
 				else:
 					lpre = "right_"
-			bullet.position = bullet_spawn_position[lpre+firing_direction]
-			add_child(bullet)
+			bullet.position = bullet_spawn_position[lpre+firing_direction]+position
+			get_parent().add_child(bullet)
 		
 	
 
