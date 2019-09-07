@@ -1,15 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Player/Assets/player1.png" type="Texture" id=2]
-[ext_resource path="res://Player/Assets/player2.png" type="Texture" id=3]
-[ext_resource path="res://Player/Assets/player9.png" type="Texture" id=4]
-[ext_resource path="res://Player/Assets/player3.png" type="Texture" id=5]
-[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=6]
-[ext_resource path="res://Player/Assets/player8.png" type="Texture" id=7]
-[ext_resource path="res://Player/Assets/player4.png" type="Texture" id=8]
-[ext_resource path="res://Player/Assets/player6.png" type="Texture" id=9]
-[ext_resource path="res://Player/Assets/player5.png" type="Texture" id=10]
+[ext_resource path="res://Bullets/Bullet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Assets/player1.png" type="Texture" id=3]
+[ext_resource path="res://Player/Assets/player2.png" type="Texture" id=4]
+[ext_resource path="res://Player/Assets/player9.png" type="Texture" id=5]
+[ext_resource path="res://Player/Assets/player3.png" type="Texture" id=6]
+[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=7]
+[ext_resource path="res://Player/Assets/player8.png" type="Texture" id=8]
+[ext_resource path="res://Player/Assets/player4.png" type="Texture" id=9]
+[ext_resource path="res://Player/Assets/player6.png" type="Texture" id=10]
+[ext_resource path="res://Player/Assets/player5.png" type="Texture" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -17,61 +18,63 @@ height = 16.0
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": true,
 "name": "accelerating_fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "walking",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 6 ) ],
+"frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "firing_up",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "firing_down",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 9 ) ],
 "loop": true,
 "name": "falling",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 10 ) ],
 "loop": true,
 "name": "firing",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "none",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "jumping",
 "speed": 2.0
 } ]
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 2
 script = ExtResource( 1 )
+Bullet = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "accelerating_fall"
+animation = "firing"
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]

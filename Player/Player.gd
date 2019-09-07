@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export (PackedScene) var Bullet
+
 export (String) var up = "ui_up"
 export (String) var down = "ui_down"
 export (String) var left = "ui_left"
@@ -69,6 +71,38 @@ var on_air_time = 100
 
 var prev_jump_pressed = false
 var rest_time = 0
+
+var firing_direction = "none"
+
+var bullet_spawn_position = {
+	"left" : Vector2(-11,4),
+	"right" : Vector2(10,4),
+	"right_up" : Vector2(-4,-16),
+	"right_down" : Vector2(-1,17),
+	"left_up" : Vector2(5,-16),
+	"left_down" : Vector2(2,17)
+}
+
+const fire_rate = 5
+var elapsed_time_since_last_fire = 1.0/fire_rate
+
+
+func _fire():
+	if istatus[S.IFiring]:
+		if elapsed_time_since_last_fire >= 1.0/fire_rate and firing_direction != "none":
+			elapsed_time_since_last_fire = 0
+			var bullet = Bullet.instance()
+			bullet.direction = firing_direction
+			var lpre = ""
+			if firing_direction != "left" and firing_direction != "right":
+				if lstatus == S.LLeft:
+					lpre = "left_"
+				else:
+					lpre = "right_"
+			bullet.position = bullet_spawn_position[lpre+firing_direction]
+			add_child(bullet)
+		
+	
 
 func _ready():
 	pass
@@ -181,10 +215,16 @@ func _animate(delta):
 	if istatus[S.IFiring]:
 		if istatus[S.IUp]:
 			_change_animation("firing_up")
+			firing_direction = "up"
 		elif istatus[S.IDown]:
 			_change_animation("firing_down")
+			firing_direction = "down"
 		else:
 			_change_animation("firing")
+			if lstatus == S.LLeft:
+				firing_direction = "left"
+			else:
+				firing_direction = "right"
 	elif pstatus == S.PIdle:
 		_change_animation("idle")
 	elif pstatus == S.PFalling:
@@ -199,6 +239,7 @@ func _animate(delta):
 	
 	
 func _physics_process(delta):
+	elapsed_time_since_last_fire+= delta
 	force = Vector2(0, GRAVITY)
 	_inputs_process(delta)
 	_xvelocity_process(delta)
@@ -225,3 +266,4 @@ func _physics_process(delta):
 		cstatus = S.CNone
 		
 	_animate(delta)
+	_fire()
