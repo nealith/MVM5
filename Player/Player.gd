@@ -160,12 +160,16 @@ func _xvelocity_process(delta):
 		vlen -= STOP_FORCE * delta
 		if vlen < 0:
 			vlen = 0
+			if cstatus == S.CFloor or cstatus == S.CWall:
+				pstatus = S.PIdle
+		else:
+			if cstatus == S.CFloor or cstatus == S.CWall:
+				pstatus = S.PWalking
 
 		velocity.x = vlen * vsign
-		if (velocity.x <= WALK_MIN_SPEED or velocity.x >= -WALK_MIN_SPEED) and (cstatus == S.CFloor or cstatus == S.CWall):
-			pstatus = S.PIdle
+		
 	else:
-		if cstatus == S.CFloor:
+		if cstatus == S.CFloor or cstatus == S.CWall:
 			pstatus = S.PWalking
 	
 func _yvelocity_process(delta):

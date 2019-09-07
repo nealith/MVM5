@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Bullets/Bullet.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Player/Assets/player4.png" type="Texture" id=9]
 [ext_resource path="res://Player/Assets/player6.png" type="Texture" id=10]
 [ext_resource path="res://Player/Assets/player5.png" type="Texture" id=11]
+[ext_resource path="res://Player/Assets/light.png" type="Texture" id=12]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -31,7 +32,7 @@ animations = [ {
 "frames": [ ExtResource( 3 ), ExtResource( 6 ) ],
 "loop": true,
 "name": "walking",
-"speed": 2.0
+"speed": 16.0
 }, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
@@ -79,3 +80,12 @@ playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.117647, 0.117647, 0.117647, 1 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 12 )
+color = Color( 0.647059, 0.803922, 1, 1 )
+range_z_min = -5
+range_z_max = 5
