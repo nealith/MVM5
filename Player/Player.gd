@@ -8,6 +8,8 @@ export (String) var left = "ui_left"
 export (String) var right = "ui_right"
 export (String) var action = "ui_action"
 
+const I = "player"
+
 enum S { #status
 	ILeft, # I stand for input
 	IRight,

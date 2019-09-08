@@ -5,6 +5,8 @@ var path : = PoolVector2Array() setget set_path
 
 signal finish_move()
 signal hitten()
+signal eat_player()
+
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -47,6 +49,10 @@ func set_path(value : PoolVector2Array) -> void:
 		set_process(true)
 
 func _on_Area2D_body_entered(body : PhysicsBody2D):
-	if body != null and not body.get("iname") == null and body.iname == "bullet":
-		emit_signal("hitten")
-		get_parent().remove_child(self)
+	if body != null and not body.get("I") == null:
+		if body.I == "bullet":
+			emit_signal("hitten")
+			get_parent().remove_child(self)
+		elif body.I == "player":
+			emit_signal("eat_player")
+		

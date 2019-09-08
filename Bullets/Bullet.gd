@@ -7,7 +7,7 @@ extends KinematicBody2D
 var velocity = Vector2()
 var direction = "none"
 
-const iname = "bullet"
+const I = "bullet"
 
 const SPEED = 200
 
