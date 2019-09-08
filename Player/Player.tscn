@@ -76,7 +76,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -90,3 +90,5 @@ texture = ExtResource( 12 )
 color = Color( 0.647059, 0.803922, 1, 1 )
 range_z_min = -5
 range_z_max = 5
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 0.8 )
