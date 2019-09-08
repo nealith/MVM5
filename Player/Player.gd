@@ -199,11 +199,8 @@ func _yvelocity_process(delta):
 				
 
 	elif (pstatus == S.PIdle or pstatus == S.PWalking) and istatus[S.IUp] and not istatus[S.IFiring]:
-		print ("try1")
 		if on_air_time < JUMP_MAX_AIRBORNE_TIME:
-			print("try2")
 			if not prev_jump_pressed:
-				print("try3")
 				# Jump must also be allowed to happen if the character left the floor a little bit ago.
 				# Makes controls more snappy.
 				if cstatus == S.CWall:

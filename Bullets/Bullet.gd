@@ -20,7 +20,6 @@ func _ready():
 #	pass
 
 func _physics_process(delta):
-	print(direction)
 	if direction != "none":
 		if direction == "up":
 			velocity = Vector2(0,-SPEED)
