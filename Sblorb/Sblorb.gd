@@ -4,6 +4,7 @@ const SPEED : = 50.0
 var path : = PoolVector2Array() setget set_path
 
 signal finish_move()
+signal hitten()
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -44,3 +45,8 @@ func set_path(value : PoolVector2Array) -> void:
 	path = value
 	if value.size() != 0:
 		set_process(true)
+
+func _on_Area2D_body_entered(body : PhysicsBody2D):
+	if body != null and not body.get("iname") == null and body.iname == "bullet":
+		emit_signal("hitten")
+		get_parent().remove_child(self)

@@ -7,6 +7,8 @@ extends KinematicBody2D
 var velocity = Vector2()
 var direction = "none"
 
+const iname = "bullet"
+
 const SPEED = 200
 
 # Called when the node enters the scene tree for the first time.

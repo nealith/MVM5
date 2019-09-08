@@ -5,11 +5,11 @@
 [ext_resource path="res://Player/Assets/player1.png" type="Texture" id=3]
 [ext_resource path="res://Player/Assets/player2.png" type="Texture" id=4]
 [ext_resource path="res://Player/Assets/player9.png" type="Texture" id=5]
-[ext_resource path="res://Player/Assets/player3.png" type="Texture" id=6]
-[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=7]
-[ext_resource path="res://Player/Assets/player8.png" type="Texture" id=8]
+[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=6]
+[ext_resource path="res://Player/Assets/player3.png" type="Texture" id=7]
+[ext_resource path="res://Player/Assets/player6.png" type="Texture" id=8]
 [ext_resource path="res://Player/Assets/player4.png" type="Texture" id=9]
-[ext_resource path="res://Player/Assets/player6.png" type="Texture" id=10]
+[ext_resource path="res://Player/Assets/player8.png" type="Texture" id=10]
 [ext_resource path="res://Player/Assets/player5.png" type="Texture" id=11]
 [ext_resource path="res://Player/Assets/light.png" type="Texture" id=12]
 
@@ -29,19 +29,24 @@ animations = [ {
 "name": "accelerating_fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 6 ) ],
-"loop": true,
-"name": "walking",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 7 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "firing_up",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 3 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "walking",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "none",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "firing_down",
+"name": "firing",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ) ],
@@ -51,12 +56,7 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 10 ) ],
 "loop": true,
-"name": "firing",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "none",
+"name": "firing_down",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 11 ) ],

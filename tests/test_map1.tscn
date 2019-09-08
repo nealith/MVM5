@@ -477,7 +477,4 @@ tile_data = PoolIntArray( -262131, 0, 0, -262130, 0, 0, -131080, 0, 0, -131079, 
 
 [node name="Sblorb" parent="." instance=ExtResource( 4 )]
 position = Vector2( 202.639, 180.375 )
-
-[node name="Line2D" type="Line2D" parent="."]
-texture_mode = -916354232
 [connection signal="finish_move" from="Sblorb" to="." method="_on_Sblorb_finish_move"]
