@@ -278,3 +278,6 @@ func _physics_process(delta):
 		
 	_animate(delta)
 	_fire()
+	
+func hitten():
+	print("hitten")
