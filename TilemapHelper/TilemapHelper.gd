@@ -4,7 +4,7 @@ extends Node
 # var a = 2
 # var b = "text"
 
-
+export (PackedScene) var TileArea
 
 signal command_available()
 signal command_unavailable()
@@ -35,16 +35,13 @@ var current_command_type : String = "none"
 
 
 func get_cell(pos : Vector2):
-	return tilemap.get_cell(pos.x-1,pos.y)
+	return tilemap.get_cell(pos.x,pos.y)
 	
 	
 func create_area(pos : Vector2) -> Area2D:
-	var area2d : Area2D = Area2D.instance()
+	var area2d : Area2D = TileArea.instance()
+	add_child(area2d)
 	area2d.global_position = pos*32
-	add_child(area2d)	
-	var shape : CollisionShape2D = CollisionShape2D.instance()
-	shape.shape = RectangleShape2D.instance()
-	shape.shape.extends = Vector2(32,32)
 	return area2d
 
 func create_hatch(pos : Vector2):
@@ -101,28 +98,33 @@ func _ready():
 	player.connect("toogle_command",self,"toogle_command")
 	
 	for i in commands_tiles:
+		
 		var left = Vector2(i.x-1,i.y)
 		var right = Vector2(i.x+1,i.y)
-		var top = Vector2(i.x,i.y-1)
+		var top = Vector2(i.x,i.y-1)		
 		
-		var element_commanded_pos : = Vector2(0,0)
-		var element_commanded_type : = "none"
+		var tmp = [Vector2(0,0),"none"]
 		
 		if get_cell(left) == hatch_closed_id:
-			[element_commanded_pos,element_commanded_type] = create_hatch(left) 
+			tmp = create_hatch(left)
 		elif get_cell(right) == hatch_closed_id:
-			[element_commanded_pos,element_commanded_type] = create_hatch(right)
+			tmp = create_hatch(right)
 		elif get_cell(left) == door_closed_bottom_id:
-			[element_commanded_pos,element_commanded_type] = create_door(left)
+			tmp = create_door(left)
 		elif get_cell(right) == door_closed_bottom_id:
-			[element_commanded_pos,element_commanded_type] = create_door(right)
+			tmp = create_door(right)
 		elif get_cell(top) == screen_id:
-			[element_commanded_pos,element_commanded_type] = create_screen(top)
+			tmp = create_screen(top)
 			
+		var element_commanded_pos : Vector2 = tmp[0]
+		var element_commanded_type : String = tmp[1]
+			
+		print(element_commanded_pos)
+		
 		if element_commanded_type != "none":
 			
 			print(element_commanded_type) 
-			var area2d = create_area(i)
+			var area2d = create_area(i)			
 			
 			area2d.connect("body_entered",self,"body_entered",[element_commanded_pos,element_commanded_type])
 			area2d.connect("body_exited",self,"body_exited",[element_commanded_pos,element_commanded_type])
