@@ -130,8 +130,6 @@ func _ready():
 			
 		var element_commanded_pos : Vector2 = tmp[0]
 		var element_commanded_type : String = tmp[1]
-			
-		print(element_commanded_pos)
 		
 		if element_commanded_type != "none":
 			

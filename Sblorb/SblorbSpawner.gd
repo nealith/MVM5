@@ -24,12 +24,26 @@ func _ready():
 		add_child(s)
 
 func _finish_moving(sblorb):
-	
+	print("ddddeeeeee")
 	if tilemap != null and nav2d != null:
 		var limits : Rect2 = tilemap.get_used_rect()
-		randomize ()
-		var x = randf() * (limits.size.x*32) + limits.position.x*32
-		var y = randf() * (limits.size.y*32) + limits.position.y*32
 		
-		var new_path : = nav2d.get_simple_path(sblorb.global_position,Vector2(x,y))
+		var loop : bool = true
+		var new_path
+		while(loop):
+		
+			randomize ()
+			var x = randf() * (limits.size.x*32) + limits.position.x*32
+			var y = randf() * (limits.size.y*32) + limits.position.y*32
+			
+			var destination : Vector2 = nav2d.get_closest_point(Vector2(x,y))
+			
+			print (sblorb.global_position)
+			print (destination)
+			
+			new_path = nav2d.get_simple_path(sblorb.global_position,destination)
+			
+			print (new_path)
+			loop = !(new_path.size() != 0)
+			
 		sblorb.path = new_path

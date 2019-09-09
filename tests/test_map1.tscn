@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://tests/test_map1.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -125,6 +125,10 @@ vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
 [sub_resource type="NavigationPolygon" id=33]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+
+[sub_resource type="NavigationPolygon" id=69]
 vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
@@ -638,6 +642,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 31/tile_mode = 0
 31/occluder_offset = Vector2( 0, 0 )
 31/navigation_offset = Vector2( 0, 0 )
+31/navigation = SubResource( 69 )
 31/shapes = [  ]
 31/z_index = 0
 32/name = "tilemap.png 32"
@@ -1023,6 +1028,16 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 56/z_index = 0
+57/name = "tilemap.png 57"
+57/texture = ExtResource( 3 )
+57/tex_offset = Vector2( 0, 0 )
+57/modulate = Color( 1, 1, 1, 1 )
+57/region = Rect2( 96, 128, 32, 32 )
+57/tile_mode = 0
+57/occluder_offset = Vector2( 0, 0 )
+57/navigation_offset = Vector2( 0, 0 )
+57/shapes = [  ]
+57/z_index = 0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -1047,3 +1062,5 @@ tilemap_exp = NodePath("..")
 Sblorb = ExtResource( 6 )
 player_exp = NodePath("../player")
 nav2d_exp = NodePath("../Navigation2D")
+tilemap_exp = NodePath("../Navigation2D/TileMap")
+positions = PoolVector2Array( 500, 50, 0, 0, 0, 150 )
