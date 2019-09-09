@@ -57,10 +57,22 @@ func create_screen(pos : Vector2):
 	return [pos,"screen"]
 	
 func toogle_hatch(pos):
-	print("toogle hatch")
+	if hatchs[pos]:
+		tilemap.set_cellv(pos,hatch_closed_id)
+	else:
+		tilemap.set_cellv(pos,hatch_open_id)
+		
+	hatchs[pos] = !hatchs[pos]
 	
 func toogle_door(pos):
-	print("toogle door")
+	if doors[pos]:
+		tilemap.set_cellv(pos,door_closed_bottom_id)
+		tilemap.set_cell(pos.x,pos.y-1,door_closed_top_id)
+	else:
+		tilemap.set_cellv(pos,door_open_bottom_id)
+		tilemap.set_cell(pos.x,pos.y-1,door_open_top_id)
+		
+	doors[pos] = !doors[pos]
 
 func toogle_screen(pos):
 	print("toogle screen")
