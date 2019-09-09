@@ -10,6 +10,7 @@ export (String) var action = "ui_action"
 export (String) var command = "ui_command"
 
 signal toogle_command()
+signal dead()
 
 var command_av : bool = false
 
@@ -298,4 +299,10 @@ func _physics_process(delta):
 	_fire()
 	
 func hitten():
-	print("hitten")
+	emit_signal("dead")
+	$AnimatedSprite.animation = "dead"
+	set_physics_process(false)
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "dead":
+		get_parent().remove_child(self)

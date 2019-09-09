@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Sblorb/Sblorb.gd" type="Script" id=1]
 [ext_resource path="res://Sblorb/sblorb1.png" type="Texture" id=2]
 [ext_resource path="res://Sblorb/sblorb2.png" type="Texture" id=3]
+[ext_resource path="res://Sblorb/sblorb3.png" type="Texture" id=4]
+[ext_resource path="res://Sblorb/sblorb4.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0
@@ -12,6 +14,11 @@ animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "default",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "dead",
 "speed": 2.0
 } ]
 
@@ -28,3 +35,4 @@ shape = SubResource( 1 )
 frames = SubResource( 2 )
 playing = true
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]

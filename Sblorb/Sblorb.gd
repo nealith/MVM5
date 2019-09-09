@@ -53,7 +53,15 @@ func _on_Area2D_body_entered(body : PhysicsBody2D):
 	if body != null and not body.get("I") == null:
 		if body.I == "bullet":
 			emit_signal("hitten")
-			get_parent().remove_child(self)
+			set_process(false)
+			$AnimatedSprite.animation = "dead"
+			
 		elif body.I == "player":
+			set_process(false)
 			emit_signal("hit_player")
-		
+			get_parent().remove_child(self)
+
+
+func _on_AnimatedSprite_animation_finished():
+	if $AnimatedSprite.animation == "dead":
+		get_parent().remove_child(self)

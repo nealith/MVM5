@@ -1,17 +1,18 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Bullets/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Assets/player1.png" type="Texture" id=3]
 [ext_resource path="res://Player/Assets/player2.png" type="Texture" id=4]
-[ext_resource path="res://Player/Assets/player9.png" type="Texture" id=5]
-[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=6]
+[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=5]
+[ext_resource path="res://Player/Assets/player9.png" type="Texture" id=6]
 [ext_resource path="res://Player/Assets/player6.png" type="Texture" id=7]
 [ext_resource path="res://Player/Assets/player4.png" type="Texture" id=8]
 [ext_resource path="res://Player/Assets/player3.png" type="Texture" id=9]
-[ext_resource path="res://Player/Assets/player5.png" type="Texture" id=10]
-[ext_resource path="res://Player/Assets/player8.png" type="Texture" id=11]
-[ext_resource path="res://Player/Assets/light.png" type="Texture" id=12]
+[ext_resource path="res://Player/Assets/player10.png" type="Texture" id=10]
+[ext_resource path="res://Player/Assets/player5.png" type="Texture" id=11]
+[ext_resource path="res://Player/Assets/player8.png" type="Texture" id=12]
+[ext_resource path="res://Player/Assets/light.png" type="Texture" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -26,12 +27,12 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "accelerating_fall",
+"name": "firing_up",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "firing_up",
+"name": "accelerating_fall",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 7 ) ],
@@ -56,10 +57,15 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 10 ) ],
 "loop": true,
+"name": "dead",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
 "name": "jumping",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 11 ) ],
+"frames": [ ExtResource( 12 ) ],
 "loop": true,
 "name": "firing_down",
 "speed": 5.0
@@ -86,9 +92,10 @@ current = true
 color = Color( 0.117647, 0.117647, 0.117647, 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 color = Color( 0.647059, 0.803922, 1, 1 )
 range_z_min = -5
 range_z_max = 5
 shadow_enabled = true
 shadow_color = Color( 0, 0, 0, 0.8 )
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
