@@ -10,9 +10,11 @@ export (String) var action = "ui_action"
 export (String) var command = "ui_command"
 
 signal toogle_command()
+signal use_hatch()
 signal dead()
 
 var command_av : bool = false
+var hatch_av : bool = false
 
 const I = "player"
 
@@ -100,6 +102,12 @@ func command_available():
 
 func command_unavailable():
 	command_av = false
+	
+func hatch_available():
+	hatch_av = true
+
+func hatch_unavailable():
+	hatch_av = false
 
 
 func _fire():
@@ -160,6 +168,8 @@ func _inputs_process(delta):
 		istatus[S.ICommand] = true
 		if command_av:
 			emit_signal("toogle_command")
+		elif hatch_av:
+			emit_signal("use_hatch")
 
 func _xvelocity_process(delta):
 	var stop = true
