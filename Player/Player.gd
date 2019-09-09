@@ -7,6 +7,11 @@ export (String) var down = "ui_down"
 export (String) var left = "ui_left"
 export (String) var right = "ui_right"
 export (String) var action = "ui_action"
+export (String) var command = "ui_command"
+
+signal toogle_command()
+
+var command_av : bool = false
 
 const I = "player"
 
@@ -16,6 +21,7 @@ enum S { #status
 	IUp,
 	IDown,
 	IFiring,
+	ICommand,
 	INone,
 	LLeft, # L stand for look at
 	LRight,
@@ -88,6 +94,12 @@ var bullet_spawn_position = {
 const fire_rate = 5
 var elapsed_time_since_last_fire = 1.0/fire_rate
 
+func command_available():
+	command_av = true
+
+func command_unavailable():
+	command_av = false
+
 
 func _fire():
 	if istatus[S.IFiring]:
@@ -124,7 +136,8 @@ func _inputs_process(delta):
 		S.ILeft : false,
 		S.IRight : false,
 		S.IUp : false,
-		S.IDown : false
+		S.IDown : false,
+		S.ICommand : false
 	}
 	
 	if Input.is_action_pressed(action):
@@ -141,6 +154,11 @@ func _inputs_process(delta):
 		istatus[S.IUp] = true
 	elif Input.is_action_pressed(down):
 		istatus[S.IDown] = true
+		
+	if Input.is_action_just_pressed(command):
+		istatus[S.ICommand] = true
+		if command_av:
+			emit_signal("toogle_command")
 
 func _xvelocity_process(delta):
 	var stop = true
