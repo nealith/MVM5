@@ -1,7 +1,8 @@
-extends KinematicBody2D
+extends Node2D
 
 const SPEED : = 50.0
 var path : = PoolVector2Array() setget set_path
+
 
 
 signal finish_move(sblorb)
@@ -13,11 +14,6 @@ var type = "normal"
 var default_animation = "default"
 var dead_animation = "dead"
 
-var velocity
-
-const MAX_ATTEMPS = 5
-var attemps_counter = 0
-var old_distance = -1
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -34,43 +30,52 @@ func _ready() -> void:
 	emit_signal("finish_move",self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta : float) -> void:
+func _process(delta : float) -> void:
+	var move_distance : = SPEED * delta
+	move_along_path(move_distance)
+
+func move_along_path(distance : float) -> void:
 	
-	if path.size() > 0:
-		velocity = (path[0] - position).normalized() * SPEED
-		var distance = (path[0] - position).length()
-		if distance > 4: # value from https://godotengine.org/qa/40991/moving-colliding-multiple-objects-on-a-nav2d-tilemap
-            move_and_slide(velocity)
-		else:
+	if path.size() > 0 and get_parent().check_path(global_position,path[path.size()-1]):
+	
+		var start_point : = global_position
+		
+		for i in range(path.size()):
+			var distance_to_next := start_point.distance_to(path[0])
+			if distance <= distance_to_next and distance >= 0.0:
+				global_position = start_point.linear_interpolate(path[0], distance / distance_to_next)
+				break
+			elif distance < 0.0:
+				global_position = path[0]
+				set_process(false)
+				emit_signal("finish_move",self)
+				break
+				
+			distance -= distance_to_next
+			start_point = path[0]
 			path.remove(0)
-			
-		if distance == old_distance:
-			print("ho my god")
-			attemps_counter+=1
-			if attemps_counter == MAX_ATTEMPS:
-				old_distance = -1
-				attemps_counter = 0
-				path = []
-			
-		old_distance = distance
-	else:
+	
+	else :
+		path = []
+	
+	if path.size() == 0:
+		set_process(false)
 		emit_signal("finish_move",self)
-		set_physics_process(false)
 
 func set_path(value : PoolVector2Array) -> void:
 	path = value
 	if value.size() != 0:
-		set_physics_process(true)
+		set_process(true)
 
 func _on_Area2D_body_entered(body : PhysicsBody2D):
 	if body != null and not body.get("I") == null:
 		if body.I == "bullet":
 			emit_signal("hitten")
-			set_physics_process(false)
+			set_process(false)
 			$AnimatedSprite.animation = dead_animation
 			
 		elif body.I == "player" and $AnimatedSprite.animation != dead_animation:
-			set_physics_process(false)
+			set_process(false)
 			emit_signal("hit_player")
 			get_parent().remove_child(self)
 

@@ -34,6 +34,10 @@ func _ready():
 		s.connect("finish_move",self,"_finish_moving",["red_sblorb"])
 		add_child(s)
 
+func check_path(origine : Vector2,destination : Vector2) -> bool:
+	var p :=  nav2d.get_simple_path(origine,destination)
+	return (p.size() > 0 and  p[p.size()-1] == destination)
+
 func _finish_moving(sblorb,type):
 	if tilemap != null and nav2d != null:
 		var limits : Rect2 = tilemap.get_used_rect()
@@ -46,7 +50,6 @@ func _finish_moving(sblorb,type):
 			var destination : Vector2
 			
 			if type == "red_sblorb":
-				print("is red sblorb")
 				
 				wanted_destination = player.global_position
 
@@ -64,6 +67,7 @@ func _finish_moving(sblorb,type):
 				destination = nav2d.get_closest_point(wanted_destination)
 			
 				new_path = nav2d.get_simple_path(sblorb.global_position,destination)
-			loop = !(new_path.size() != 0)
 			
+			loop = !(new_path.size() > 0)
+		
 		sblorb.path = new_path
