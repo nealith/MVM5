@@ -114,6 +114,7 @@ func body_entered(body,type,param1,param2):
 				current_command_type = param2
 				emit_signal("command_available")
 			elif type == "hatch":
+				print("lol")
 				if hatchs[param1]:
 					current_hatch = param1
 					emit_signal("hatch_available")
@@ -122,13 +123,14 @@ func body_exited(body,type,param1,param2):
 	if body != null and not body.get("I") == null:
 		if body.I == "player":
 			if body.I == "player":
-				current_command_pos = Vector2(0,0)
-				current_command_type = "none"
-				emit_signal("command_unavailable")
-			elif type == "hatch":
-				if hatchs[param1]:
-					current_hatch = null
-					emit_signal("hatch_unavailable")
+				if type == "command":
+					current_command_pos = Vector2(0,0)
+					current_command_type = "none"
+					emit_signal("command_unavailable")
+				elif type == "hatch":
+					if hatchs[param1]:
+						current_hatch = null
+						emit_signal("hatch_unavailable")
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
