@@ -67,7 +67,7 @@ func use_hatch():
 	print ("use hatch")
 	if current_hatch != null:
 		var destination = hatchs_link[current_hatch]
-		player.global_position = destination*32
+		player.global_position = destination*32 + Vector2(16,16)
 		var t = tilemap.get_cellv(destination)
 		if t == hatch_closed_id:
 			tilemap.set_cellv(destination,hatch_open_id)
