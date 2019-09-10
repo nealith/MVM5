@@ -104,9 +104,11 @@ func command_unavailable():
 	command_av = false
 	
 func hatch_available():
+	print("hatch_available")
 	hatch_av = true
 
 func hatch_unavailable():
+	print("hatch_unavailable")
 	hatch_av = false
 
 

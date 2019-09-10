@@ -71,6 +71,8 @@ func use_hatch():
 		var t = tilemap.get_cellv(destination)
 		if t == hatch_closed_id:
 			tilemap.set_cellv(destination,hatch_open_id)
+			hatchs[destination] = true
+			current_hatch = destination
 		elif t != hatch_open_id:
 			print ("sure that the destination tiles for ",current_hatch," is a hatch ?")
 	
@@ -128,7 +130,7 @@ func body_exited(body,type,param1,param2):
 					current_command_type = "none"
 					emit_signal("command_unavailable")
 				elif type == "hatch":
-					if hatchs[param1]:
+					if hatchs[param1] and current_hatch == param1:
 						current_hatch = null
 						emit_signal("hatch_unavailable")
 	
