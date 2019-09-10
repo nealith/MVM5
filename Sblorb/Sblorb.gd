@@ -56,7 +56,7 @@ func _on_Area2D_body_entered(body : PhysicsBody2D):
 			set_process(false)
 			$AnimatedSprite.animation = "dead"
 			
-		elif body.I == "player":
+		elif body.I == "player" and $AnimatedSprite.animation != "dead":
 			set_process(false)
 			emit_signal("hit_player")
 			get_parent().remove_child(self)
