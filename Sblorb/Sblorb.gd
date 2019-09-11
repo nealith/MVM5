@@ -14,7 +14,7 @@ var type = "sblorb"
 var default_animation = "default"
 var dead_animation = "dead"
 
-const CHECK_TIME = 0.5
+const CHECK_TIME = 1.0
 var elapsed_time_since_last_check = 0
 
 # Declare member variables here. Examples:
@@ -34,14 +34,14 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void:
 	elapsed_time_since_last_check += delta
-#	if elapsed_time_since_last_check >= CHECK_TIME:
-#		elapsed_time_since_last_check = 0
-#		if type == "sblorb" and path.size() > 0:
-#			if !(get_parent().check_path(global_position,path[path.size()-1])):
-#				print("testsqffdsfds")
-#				path = []
-#		elif type == "red_sblorb":
-#			path = []
+	if elapsed_time_since_last_check >= CHECK_TIME:
+		elapsed_time_since_last_check = 0
+		if type == "sblorb" and path.size() > 0:
+			if !(get_parent().check_path(global_position,path[path.size()-1])):
+				print("testsqffdsfds")
+				path = []
+		elif type == "red_sblorb":
+			path = []
 	
 		
 	if path.size() > 0:

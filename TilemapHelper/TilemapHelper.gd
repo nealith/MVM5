@@ -14,6 +14,7 @@ signal hatch_unavailable()
 
 export (NodePath) var player_exp
 export (NodePath) var tilemap_exp
+export (NodePath) var navtilemap_exp
 export (Dictionary) var hatchs_link
 
 const command_id : int = 8
@@ -24,9 +25,11 @@ const door_open_top_id : int = 15
 const door_closed_bottom_id : int = 21
 const door_open_bottom_id : int = 20
 const screen_id : int = 1
+const door_nav_tile : int = 58
 
 onready var player : KinematicBody2D = get_node(player_exp)
 onready var tilemap : TileMap = get_node(tilemap_exp)
+onready var navtilemap : TileMap = get_node(navtilemap_exp)
 onready var tileset : TileSet = tilemap.tile_set
 onready var commands_tiles : Array = tilemap.get_used_cells_by_id(command_id)
 onready var hatchs_tiles : Array = tilemap.get_used_cells_by_id(hatch_closed_id)
@@ -88,10 +91,15 @@ func toogle_door(pos):
 	if doors[pos]:
 		tilemap.set_cellv(pos,door_closed_bottom_id)
 		tilemap.set_cell(pos.x,pos.y-1,door_closed_top_id)
+		navtilemap.set_cellv(pos,-1)
+		navtilemap.set_cell(pos.x,pos.y-1,-1)
 	else:
 		tilemap.set_cellv(pos,door_open_bottom_id)
 		tilemap.set_cell(pos.x,pos.y-1,door_open_top_id)
-		
+		navtilemap.set_cellv(pos,door_nav_tile)
+		navtilemap.set_cell(pos.x,pos.y-1,door_nav_tile)
+	
+	navtilemap.update_bitmask_area(pos)	
 	doors[pos] = !doors[pos]
 
 func toogle_screen(pos):
