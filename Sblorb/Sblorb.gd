@@ -9,11 +9,13 @@ signal finish_move(sblorb)
 signal hitten()
 signal hit_player()
 
-var type = "normal"
+var type = "sblorb"
 
 var default_animation = "default"
 var dead_animation = "dead"
 
+const CHECK_TIME = 0.5
+var elapsed_time_since_last_check = 0
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -31,13 +33,19 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void:
-	var move_distance : = SPEED * delta
-	move_along_path(move_distance)
-
-func move_along_path(distance : float) -> void:
+	elapsed_time_since_last_check += delta
+	if elapsed_time_since_last_check >= CHECK_TIME:
+		elapsed_time_since_last_check = 0
+		if type == "sblorb" and path.size() > 0:
+			if !(get_parent().check_path(global_position,path[path.size()-1])):
+				print("testsqffdsfds")
+				path = []
+		elif type == "red_sblorb":
+			path = []
 	
-	if path.size() > 0 and get_parent().check_path(global_position,path[path.size()-1]):
-	
+		
+	if path.size() > 0:
+		var distance : = SPEED * delta
 		var start_point : = global_position
 		
 		for i in range(path.size()):
@@ -55,12 +63,11 @@ func move_along_path(distance : float) -> void:
 			start_point = path[0]
 			path.remove(0)
 	
-	else :
-		path = []
-	
-	if path.size() == 0:
+	else:
 		set_process(false)
 		emit_signal("finish_move",self)
+	
+	
 
 func set_path(value : PoolVector2Array) -> void:
 	path = value
