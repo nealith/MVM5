@@ -17,7 +17,9 @@ signal show_screen_message(message)
 export (NodePath) var player_exp
 export (NodePath) var tilemap_exp
 export (NodePath) var navtilemap_exp
-export (Dictionary) var hatchs_link
+export (NodePath) var hatchslinktilemap_exp
+
+
 export (Dictionary) var screens_text
 
 const command_id : int = 8
@@ -30,16 +32,24 @@ const door_open_bottom_id : int = 20
 const screen_id : int = 1
 const door_nav_tile : int = 58
 
+const max_number_of_hatch_link : int = 25
+
 onready var player : KinematicBody2D = get_node(player_exp)
 onready var tilemap : TileMap = get_node(tilemap_exp)
 onready var navtilemap : TileMap = get_node(navtilemap_exp)
+onready var hatchslinktilemap : TileMap = get_node(hatchslinktilemap_exp)
+
 onready var tileset : TileSet = tilemap.tile_set
 onready var commands_tiles : Array = tilemap.get_used_cells_by_id(command_id)
 onready var hatchs_tiles : Array = tilemap.get_used_cells_by_id(hatch_closed_id)
 
+
+
 var doors : Dictionary = {}
 var screens : Dictionary = {}
 var hatchs : Dictionary = {}
+
+var hatchs_link : Dictionary = {}
 
 var current_command_pos : Vector2 = Vector2(0,0)
 var current_command_type : String = "none"
@@ -145,6 +155,8 @@ func body_exited(body,type,param1,param2):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
+	hatchslinktilemap.visible = false
+	
 	connect("command_available",player,"command_available")
 	connect("command_unavailable",player,"command_unavailable")
 	connect("hatch_available",player,"hatch_available")
@@ -158,9 +170,13 @@ func _ready():
 		var area2d = create_area(i)
 		area2d.connect("body_entered",self,"body_entered",["hatch",i,null])
 		area2d.connect("body_exited",self,"body_exited",["hatch",i,null])
-		
-	for i in hatchs_link.keys():
-		hatchs_link[hatchs_link[i]] = i
+	
+	var j : int = 1
+	while j <= max_number_of_hatch_link:
+		var link : Array = hatchslinktilemap.get_used_cells_by_id(j)
+		if link.size() == 2:
+			hatchs_link[link[0]] = link[1]
+			hatchs_link[link[1]] = link[0]
 	
 	for i in commands_tiles:
 		

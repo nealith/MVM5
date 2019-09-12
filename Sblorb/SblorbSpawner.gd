@@ -4,18 +4,27 @@ export (PackedScene) var Sblorb
 export (NodePath) var player_exp
 export (NodePath) var nav2d_exp
 export (NodePath) var tilemap_exp
-export (PoolVector2Array) var sblorbs
-export (PoolVector2Array) var red_sblorbs
+export (NodePath) var spawnstilemap_exp
 
 
 onready var player : KinematicBody2D = get_node(player_exp)
 onready var nav2d : Navigation2D = get_node(nav2d_exp)
 onready var tilemap : TileMap = get_node(tilemap_exp)
+onready var spawnstilemap : TileMap = get_node(spawnstilemap_exp)
+
+const red_sblorb_id : int = 1
+const sblorb_id : int = 2
+
+onready var sblorbs : Array = spawnstilemap.get_used_cells_by_id(sblorb_id)
+onready var red_sblorbs : Array = spawnstilemap.get_used_cells_by_id(red_sblorb_id)
+
 var sblorb_instances : Array = []
 var red_sblorb_instances : Array = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	spawnstilemap.visible = false
+	
 	for p in sblorbs:
 		var s : Node2D = Sblorb.instance()
 		s.global_position = nav2d.get_closest_point(p*32 + Vector2(16,16))
