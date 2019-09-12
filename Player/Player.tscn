@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Bullets/Bullet.tscn" type="PackedScene" id=2]
@@ -12,7 +12,9 @@
 [ext_resource path="res://Player/Assets/player3.png" type="Texture" id=10]
 [ext_resource path="res://Player/Assets/player6.png" type="Texture" id=11]
 [ext_resource path="res://Player/Assets/player9.png" type="Texture" id=12]
-[ext_resource path="res://Player/Assets/light.png" type="Texture" id=13]
+[ext_resource path="res://Fonts/assets/GreenFlame.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://Player/Assets/text_light.png" type="Texture" id=14]
+[ext_resource path="res://Player/Assets/light.png" type="Texture" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -71,6 +73,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="DynamicFont" id=3]
+size = 13
+use_mipmaps = true
+font_data = ExtResource( 13 )
+
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
 collision_mask = 118
@@ -80,20 +87,44 @@ Bullet = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+light_mask = 3
+current = true
+process_mode = 0
+drag_margin_h_enabled = false
+drag_margin_v_enabled = false
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "idle"
-frame = 2
+frame = 1
 playing = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+light_mask = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = -110.0
+margin_right = 150.0
+margin_bottom = -50.0
+custom_fonts/normal_font = SubResource( 3 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+text = "tetststststst"
+
+[node name="Light2D" type="Light2D" parent="RichTextLabel"]
+position = Vector2( 150, 30 )
+texture = ExtResource( 14 )
+energy = 3.0
+range_z_min = -1
+range_z_max = 1
+range_item_cull_mask = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color( 0.117647, 0.117647, 0.117647, 1 )
+color = Color( 0.152941, 0.152941, 0.152941, 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 color = Color( 0.647059, 0.803922, 1, 1 )
 range_z_min = -5
 range_z_max = 5

@@ -102,6 +102,8 @@ func command_available():
 
 func command_unavailable():
 	command_av = false
+	$RichTextLabel.visible = false
+	$RichTextLabel.text = ""
 	
 func hatch_available():
 	print("hatch_available")
@@ -321,3 +323,5 @@ func _on_AnimatedSprite_animation_finished():
 
 func receive_message_from_screen(message):
 	print (message)
+	$RichTextLabel.visible = true
+	$RichTextLabel.text = message
