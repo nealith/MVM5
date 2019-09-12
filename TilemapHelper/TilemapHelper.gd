@@ -12,10 +12,13 @@ signal command_unavailable()
 signal hatch_available()
 signal hatch_unavailable()
 
+signal show_screen_message(message)
+
 export (NodePath) var player_exp
 export (NodePath) var tilemap_exp
 export (NodePath) var navtilemap_exp
 export (Dictionary) var hatchs_link
+export (Dictionary) var screens_text
 
 const command_id : int = 8
 const hatch_closed_id : int = 6
@@ -43,7 +46,6 @@ var current_command_type : String = "none"
 
 var current_hatch = null
 
-
 func get_cell(pos : Vector2):
 	return tilemap.get_cell(pos.x,pos.y)
 	
@@ -63,7 +65,6 @@ func create_door(pos : Vector2):
 	return [pos,"door"]
 	
 func create_screen(pos : Vector2):
-	screens[pos] = false
 	return [pos,"screen"]
 	
 func use_hatch():
@@ -103,7 +104,7 @@ func toogle_door(pos):
 	doors[pos] = !doors[pos]
 
 func toogle_screen(pos):
-	print("toogle screen")
+	emit_signal("show_screen_message",screens_text[pos])
 	
 func toogle(pos,type):
 	if type == "hatch":
@@ -124,7 +125,6 @@ func body_entered(body,type,param1,param2):
 				current_command_type = param2
 				emit_signal("command_available")
 			elif type == "hatch":
-				print("lol")
 				if hatchs[param1]:
 					current_hatch = param1
 					emit_signal("hatch_available")
@@ -149,6 +149,7 @@ func _ready():
 	connect("command_unavailable",player,"command_unavailable")
 	connect("hatch_available",player,"hatch_available")
 	connect("hatch_unavailable",player,"hatch_unavailable")
+	connect("show_screen_message",player,"receive_message_from_screen")
 	player.connect("toogle_command",self,"toogle_command")
 	player.connect("use_hatch",self,"use_hatch")
 	

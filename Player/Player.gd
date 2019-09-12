@@ -318,3 +318,6 @@ func hitten():
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "dead":
 		get_parent().remove_child(self)
+
+func receive_message_from_screen(message):
+	print (message)

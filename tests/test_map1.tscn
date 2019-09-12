@@ -1043,6 +1043,10 @@ hatchs_link = {
 Vector2( -5, 2 ): Vector2( -6, 8 ),
 Vector2( 14, 8 ): Vector2( 26, 1 )
 }
+screens_text = {
+Vector2( 8, 4 ): "Ho lala ça pue",
+Vector2( 20, 0 ): "Mais qu'elle est cette merde"
+}
 
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
