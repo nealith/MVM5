@@ -97,10 +97,11 @@ drag_margin_v_enabled = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "idle"
-frame = 1
+frame = 4
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
 light_mask = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -110,7 +111,6 @@ margin_right = 150.0
 margin_bottom = -50.0
 custom_fonts/normal_font = SubResource( 3 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
-text = "tetststststst"
 
 [node name="Light2D" type="Light2D" parent="RichTextLabel"]
 position = Vector2( 150, 30 )

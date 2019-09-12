@@ -14,7 +14,7 @@ var type = "sblorb"
 var default_animation = "default"
 var dead_animation = "dead"
 
-const CHECK_TIME = 1.0
+const CHECK_TIME = 0.5
 var elapsed_time_since_last_check = 0
 
 # Declare member variables here. Examples:
@@ -23,7 +23,7 @@ var elapsed_time_since_last_check = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if type == "red":
+	if type == "red_sblorb":
 		default_animation = "red_default"
 		dead_animation = "red_dead"
 	$AnimatedSprite.animation = default_animation

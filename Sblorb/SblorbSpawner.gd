@@ -28,6 +28,7 @@ func _ready():
 	for p in red_sblorbs:
 		var s : Node2D = Sblorb.instance()
 		s.global_position = nav2d.get_closest_point(p*32 + Vector2(16,16))
+		s.type = "red_sblorb"
 		sblorb_instances.append(s)
 		if player != null:
 			s.connect("hit_player",player,"hitten")
@@ -56,7 +57,7 @@ func _finish_moving(sblorb,type):
 				destination = nav2d.get_closest_point(wanted_destination)
 				
 				new_path = nav2d.get_simple_path(sblorb.global_position,wanted_destination,false)
-				if new_path.size() == 0 or new_path[new_path.size()-1] != wanted_destination:
+				if new_path.size() == 0 or new_path[new_path.size()-1] < wanted_destination + Vector2(-16,-16) or new_path[new_path.size()-1] > wanted_destination + Vector2(16,16) :
 					type = "sblorb"
 	
 			
