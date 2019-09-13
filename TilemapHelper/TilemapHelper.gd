@@ -171,12 +171,16 @@ func _ready():
 		area2d.connect("body_entered",self,"body_entered",["hatch",i,null])
 		area2d.connect("body_exited",self,"body_exited",["hatch",i,null])
 	
+	
+	
 	var j : int = 1
 	while j <= max_number_of_hatch_link:
 		var link : Array = hatchslinktilemap.get_used_cells_by_id(j)
 		if link.size() == 2:
+			
 			hatchs_link[link[0]] = link[1]
 			hatchs_link[link[1]] = link[0]
+		j+=1
 	
 	for i in commands_tiles:
 		

@@ -198,11 +198,11 @@ polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ),
 vertices = PoolVector2Array( 32, 15.8675, 32, 0, 0, 0, 0, 32, 15.8675, 32, 15.9797, 15.9797 )
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 
-[sub_resource type="NavigationPolygon" id=59]
+[sub_resource type="NavigationPolygon" id=58]
 vertices = PoolVector2Array( 0, 7.95578, 32, 8.04926, 32, 32, 0, 32 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ) ]
 
-[sub_resource type="TileSet" id=58]
+[sub_resource type="TileSet" id=59]
 0/name = "tilemap.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -1015,11 +1015,21 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArra
 60/tile_mode = 0
 60/occluder_offset = Vector2( 0, 0 )
 60/navigation_offset = Vector2( 0, 0 )
-60/navigation = SubResource( 59 )
+60/navigation = SubResource( 58 )
 60/shapes = [  ]
 60/z_index = 0
+61/name = "tilemap.png 61"
+61/texture = ExtResource( 1 )
+61/tex_offset = Vector2( 0, 0 )
+61/modulate = Color( 1, 1, 1, 1 )
+61/region = Rect2( 160, 96, 32, 32 )
+61/tile_mode = 0
+61/occluder_offset = Vector2( 0, 0 )
+61/navigation_offset = Vector2( 0, 0 )
+61/shapes = [  ]
+61/z_index = 0
 
-[sub_resource type="TileSet" id=61]
+[sub_resource type="TileSet" id=60]
 0/name = "RedSblorb"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -1041,7 +1051,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArra
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="TileSet" id=60]
+[sub_resource type="TileSet" id=61]
 0/name = "tilemap_hatch_linking.png 0"
 0/texture = ExtResource( 4 )
 0/tex_offset = Vector2( 0, 0 )
@@ -1307,7 +1317,7 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArra
 
 [node name="LevelTileMap" type="TileMap" parent="."]
 z_as_relative = false
-tile_set = SubResource( 58 )
+tile_set = SubResource( 59 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 16
 collision_mask = 11
@@ -1323,19 +1333,19 @@ hatchslinktilemap_exp = NodePath("../../Hatchs_links")
 [node name="TileMap" type="TileMap" parent="Navigation2D"]
 z_index = -1
 z_as_relative = false
-tile_set = SubResource( 58 )
+tile_set = SubResource( 59 )
 cell_size = Vector2( 32, 32 )
 collision_layer = 16
 collision_mask = 11
 format = 1
 
 [node name="Spawns" type="TileMap" parent="."]
-tile_set = SubResource( 61 )
+tile_set = SubResource( 60 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
 [node name="Hatchs_links" type="TileMap" parent="."]
-tile_set = SubResource( 60 )
+tile_set = SubResource( 61 )
 cell_size = Vector2( 32, 32 )
 format = 1
 

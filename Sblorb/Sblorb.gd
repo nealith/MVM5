@@ -29,7 +29,7 @@ func _ready() -> void:
 	$AnimatedSprite.animation = default_animation
 	
 	set_process(false)
-	emit_signal("finish_move",self)
+	#emit_signal("finish_move",self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta : float) -> void:
@@ -89,3 +89,15 @@ func _on_Area2D_body_entered(body : PhysicsBody2D):
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == dead_animation:
 		get_parent().remove_child(self)
+
+
+func _on_ActivationArea_body_entered(body):
+	if body != null and not body.get("I") == null:
+		if body.I == "player":
+			emit_signal("finish_move",self)
+
+
+func _on_ActivationArea_body_exited(body):
+	if body != null and not body.get("I") == null:
+		if body.I == "player":
+			set_process(false)
