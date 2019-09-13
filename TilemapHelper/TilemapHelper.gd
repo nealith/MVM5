@@ -5,6 +5,8 @@ extends Node
 # var b = "text"
 
 export (PackedScene) var TileArea
+export (PackedScene) var ObservationLight
+export (PackedScene) var RedLight
 
 signal command_available()
 signal command_unavailable()
@@ -43,6 +45,8 @@ onready var tileset : TileSet = tilemap.tile_set
 onready var commands_tiles : Array = tilemap.get_used_cells_by_id(command_id)
 onready var hatchs_tiles : Array = tilemap.get_used_cells_by_id(hatch_closed_id)
 
+onready var redlight_tiles : Array = tilemap.get_used_cells_by_id(2)
+onready var observationlight_tiles : Array = tilemap.get_used_cells_by_id(10)
 
 
 var doors : Dictionary = {}
@@ -164,6 +168,17 @@ func _ready():
 	connect("show_screen_message",player,"receive_message_from_screen")
 	player.connect("toogle_command",self,"toogle_command")
 	player.connect("use_hatch",self,"use_hatch")
+	
+	for i in observationlight_tiles:
+		print (i)
+		var l = ObservationLight.instance()
+		l.global_position = i*32 + Vector2(16,32)
+		add_child(l)
+	
+	for i in redlight_tiles:
+		var l = RedLight.instance()
+		l.global_position = i*32 + Vector2(4,4)
+		add_child(l)
 	
 	for i in hatchs_tiles:
 		

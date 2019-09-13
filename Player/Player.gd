@@ -313,13 +313,12 @@ func _physics_process(delta):
 	_fire()
 	
 func hitten():
-	emit_signal("dead")
 	$AnimatedSprite.animation = "dead"
 	set_physics_process(false)
 
 func _on_AnimatedSprite_animation_finished():
 	if $AnimatedSprite.animation == "dead":
-		get_parent().remove_child(self)
+		emit_signal("dead")
 
 func receive_message_from_screen(message):
 	print (message)

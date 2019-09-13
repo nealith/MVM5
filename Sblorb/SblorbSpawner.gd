@@ -53,10 +53,7 @@ func check_path(origine : Vector2,destination : Vector2) -> bool:
 
 func _finish_moving(sblorb,type):
 	if tilemap != null and nav2d != null:
-		var map_limits : Rect2 = tilemap.get_used_rect()
-		
-		
-		var limits : Rect2 = Rect2(nav2d.get_closest_point(map_limits.position),nav2d.get_closest_point(map_limits.position+map_limits.size))
+		var limits : Rect2 = tilemap.get_used_rect()
 		
 		var loop : bool = true
 		var new_path
