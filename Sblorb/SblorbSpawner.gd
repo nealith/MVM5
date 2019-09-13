@@ -26,9 +26,6 @@ var red_sblorb_instances : Array = []
 func _ready():
 	spawnstilemap.visible = false
 	
-	print (sblorbs)
-	print (red_sblorbs)
-	
 	for p in sblorbs:
 		var s : Node2D = Sblorb.instance()
 		s.global_position = nav2d.get_closest_point(p*32 + Vector2(16,16))
@@ -96,8 +93,6 @@ func _finish_moving(sblorb,type):
 				wanted_destination = player.global_position
 
 				destination = nav2d.get_closest_point(wanted_destination)
-				
-				print (destination)
 				
 				new_path = nav2d.get_simple_path(sblorb.global_position,destination)
 				if new_path.size() == 0 :

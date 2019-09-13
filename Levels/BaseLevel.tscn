@@ -148,8 +148,8 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 
 [sub_resource type="NavigationPolygon" id=45]
-vertices = PoolVector2Array( 16.0333, 15.8972, 32, 16.0094, 32, 32, 16.1454, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ) ]
+vertices = PoolVector2Array( 16.0333, 15.8972, 32, 16.0094, 32, 32, 16.1081, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ) ]
 
 [sub_resource type="NavigationPolygon" id=46]
 vertices = PoolVector2Array( 32, 32, 32, 0, 16.0333, 0, 16.0333, 32 )
@@ -184,20 +184,20 @@ vertices = PoolVector2Array( 15.8504, 0, 0, 0, 0, 15.8675, 15.9626, 15.9797 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ), PoolIntArray( 0, 1, 2, 3 ) ]
 
 [sub_resource type="NavigationPolygon" id=54]
-vertices = PoolVector2Array( 16.0504, 0, 32, 0, 32, 32, 0, 32, 0, 16.0364, 16.1626, 16.1485 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
+vertices = PoolVector2Array( 16.0504, 0, 32, 0, 32, 32, 0, 32, 0, 16.0364, 15.9539, 15.9943 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 
 [sub_resource type="NavigationPolygon" id=55]
-vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 16.2747, 32, 16.1626, 15.8675, 0, 15.9797 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
+vertices = PoolVector2Array( 0, 0, 32, 0, 32, 32, 15.9943, 32, 15.9943, 16.1105, 0, 16.0171 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 
 [sub_resource type="NavigationPolygon" id=56]
-vertices = PoolVector2Array( 0, 0, 15.8675, 0, 15.9797, 16.1485, 32, 16.2607, 32, 32, 0, 32 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
+vertices = PoolVector2Array( 0, 0, 15.8675, 0, 15.9797, 16.1485, 32, 15.9943, 32, 32, 0, 32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 
 [sub_resource type="NavigationPolygon" id=57]
-vertices = PoolVector2Array( 32, 15.8675, 32, 0, 0, 0, 0, 32, 15.8675, 32, 15.9797, 15.9797 )
-polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
+vertices = PoolVector2Array( 32, 16.0171, 32, 0, 0, 0, 0, 32, 15.8675, 32, 15.9797, 15.9797 )
+polygons = [ PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ), PoolIntArray( 0, 1, 2, 3, 4, 5 ) ]
 
 [sub_resource type="NavigationPolygon" id=58]
 vertices = PoolVector2Array( 0, 7.95578, 32, 8.04926, 32, 32, 0, 32 )

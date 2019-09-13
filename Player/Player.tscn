@@ -101,6 +101,7 @@ frame = 3
 playing = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
 light_mask = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -111,7 +112,6 @@ margin_bottom = -50.0
 custom_fonts/normal_font = SubResource( 3 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 tab_size = 3
-text = "test"
 
 [node name="Light2D" type="Light2D" parent="RichTextLabel"]
 position = Vector2( 150, 30 )
