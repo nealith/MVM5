@@ -17,6 +17,7 @@ const sblorb_id : int = 1
 
 onready var sblorbs : Array = spawnstilemap.get_used_cells_by_id(sblorb_id)
 onready var red_sblorbs : Array = spawnstilemap.get_used_cells_by_id(red_sblorb_id)
+onready var mega_red_sblorbs : Array = spawnstilemap.get_used_cells_by_id(2)
 
 var sblorb_instances : Array = []
 var red_sblorb_instances : Array = []
@@ -41,6 +42,16 @@ func _ready():
 		var s : Node2D = Sblorb.instance()
 		s.global_position = nav2d.get_closest_point(p*32 + Vector2(16,16))
 		s.type = "red_sblorb"
+		sblorb_instances.append(s)
+		if player != null:
+			s.connect("hit_player",player,"hitten")
+		s.connect("finish_move",self,"_finish_moving",["red_sblorb"])
+		add_child(s)
+		
+	for p in mega_red_sblorbs:
+		var s : Node2D = Sblorb.instance()
+		s.global_position = nav2d.get_closest_point(p*32 + Vector2(32,32))
+		s.type = "mega_red_sblorb"
 		sblorb_instances.append(s)
 		if player != null:
 			s.connect("hit_player",player,"hitten")

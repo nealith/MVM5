@@ -1,6 +1,6 @@
 extends Node2D
 
-const SPEED : = 50.0
+var SPEED : = 50.0
 var path : = PoolVector2Array() setget set_path
 
 
@@ -17,7 +17,7 @@ var dead_animation = "dead"
 const CHECK_TIME = 0.5
 var elapsed_time_since_last_check = 0
 
-const red_dead_min = 10
+var red_dead_min = 10
 var red_dead_count = 0
 
 # Declare member variables here. Examples:
@@ -29,6 +29,13 @@ func _ready() -> void:
 	if type == "red_sblorb":
 		default_animation = "red_default"
 		dead_animation = "red_dead"
+	elif type == "mega_red_sblorb":
+		default_animation = "mega_red_default"
+		dead_animation = "mega_red_dead"
+		red_dead_min = 50
+		$Area2D/CollisionShape2D.shape.radius = 32
+		SPEED = 60
+		
 	$AnimatedSprite.animation = default_animation
 	set_process(false)
 	#emit_signal("finish_move",self)
@@ -93,7 +100,8 @@ func _on_Area2D_body_entered(body : PhysicsBody2D):
 		elif body.I == "player" and $AnimatedSprite.animation != dead_animation:
 			set_process(false)
 			emit_signal("hit_player")
-			get_parent().remove_child(self)
+			if type != "mega_red_sblorb":
+				get_parent().remove_child(self)
 
 
 func _on_AnimatedSprite_animation_finished():
