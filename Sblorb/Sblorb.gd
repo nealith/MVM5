@@ -17,6 +17,9 @@ var dead_animation = "dead"
 const CHECK_TIME = 0.5
 var elapsed_time_since_last_check = 0
 
+const red_dead_min = 10
+var red_dead_count = 0
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -71,13 +74,21 @@ func set_path(value : PoolVector2Array) -> void:
 	path = value
 	if value.size() != 0:
 		set_process(true)
+		
+func _dead():
+	emit_signal("hitten")
+	set_process(false)
+	$AnimatedSprite.animation = dead_animation
 
 func _on_Area2D_body_entered(body : PhysicsBody2D):
 	if body != null and not body.get("I") == null:
 		if body.I == "bullet":
-			emit_signal("hitten")
-			set_process(false)
-			$AnimatedSprite.animation = dead_animation
+			if type == "sblorb":
+				_dead()
+			elif type == "red_sblorb":
+				red_dead_count+=1
+				if red_dead_count == red_dead_min:
+					_dead()
 			
 		elif body.I == "player" and $AnimatedSprite.animation != dead_animation:
 			set_process(false)
