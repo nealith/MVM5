@@ -27,7 +27,6 @@ func _ready() -> void:
 		default_animation = "red_default"
 		dead_animation = "red_dead"
 	$AnimatedSprite.animation = default_animation
-	
 	set_process(false)
 	#emit_signal("finish_move",self)
 

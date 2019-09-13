@@ -12,8 +12,8 @@ onready var nav2d : Navigation2D = get_node(nav2d_exp)
 onready var tilemap : TileMap = get_node(tilemap_exp)
 onready var spawnstilemap : TileMap = get_node(spawnstilemap_exp)
 
-const red_sblorb_id : int = 1
-const sblorb_id : int = 2
+const red_sblorb_id : int = 0
+const sblorb_id : int = 1
 
 onready var sblorbs : Array = spawnstilemap.get_used_cells_by_id(sblorb_id)
 onready var red_sblorbs : Array = spawnstilemap.get_used_cells_by_id(red_sblorb_id)
