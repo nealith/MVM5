@@ -52,8 +52,26 @@ func check_path(origine : Vector2,destination : Vector2) -> bool:
 	return (p.size() > 0 and  p[p.size()-1] == destination)
 
 func _finish_moving(sblorb,type):
+	
 	if tilemap != null and nav2d != null:
 		var limits : Rect2 = tilemap.get_used_rect()
+		
+		var plan_b : bool = false
+		
+		var plan_b_destination : Array = []
+		var pos_in_tile_coord = (sblorb.global_position/32.0).floor()
+		plan_b_destination.append(pos_in_tile_coord+Vector2(-1,-1))
+		plan_b_destination.append(pos_in_tile_coord+Vector2(-1,0))
+		plan_b_destination.append(pos_in_tile_coord+Vector2(0,-1))
+		plan_b_destination.append(pos_in_tile_coord+Vector2(1,-1))
+		plan_b_destination.append(pos_in_tile_coord+Vector2(-1,1))
+		plan_b_destination.append(pos_in_tile_coord+Vector2(1,0))
+		plan_b_destination.append(pos_in_tile_coord+Vector2(0,1))
+		plan_b_destination.append(pos_in_tile_coord+Vector2(1,1))
+		
+		randomize ()
+		plan_b_destination.shuffle()
+		
 		
 		var loop : bool = true
 		var new_path
@@ -68,19 +86,33 @@ func _finish_moving(sblorb,type):
 
 				destination = nav2d.get_closest_point(wanted_destination)
 				
-				new_path = nav2d.get_simple_path(sblorb.global_position,wanted_destination,false)
-				if new_path.size() == 0 or new_path[new_path.size()-1] < wanted_destination + Vector2(-16,-16) or new_path[new_path.size()-1] > wanted_destination + Vector2(16,16) :
+				print (destination)
+				
+				new_path = nav2d.get_simple_path(sblorb.global_position,destination)
+				if new_path.size() == 0 :
 					type = "sblorb"
 	
 			
 			if type == "sblorb":
+				
+				
 		
 				randomize ()
-				wanted_destination = Vector2(randf() * (limits.size.x*32) + limits.position.x*32,randf() * (limits.size.y*32) + limits.position.y*32)
+				
+				if plan_b :
+					if plan_b_destination.size() > 0 :
+						wanted_destination = Vector2(randf() * (32) + plan_b_destination[0].x*32,randf() * (32) + plan_b_destination[0].y*32)
+						plan_b_destination.remove(0)
+					else:
+						return
+				else:
+					wanted_destination = Vector2(randf() * (limits.size.x*32) + limits.position.x*32,randf() * (limits.size.y*32) + limits.position.y*32)
+
 				destination = nav2d.get_closest_point(wanted_destination)
-			
 				new_path = nav2d.get_simple_path(sblorb.global_position,destination)
 			
 			loop = !(new_path.size() > 0)
+			if loop :
+				plan_b = true
 		
 		sblorb.path = new_path

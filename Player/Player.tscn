@@ -4,21 +4,21 @@
 [ext_resource path="res://Bullets/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Assets/player1.png" type="Texture" id=3]
 [ext_resource path="res://Player/Assets/player2.png" type="Texture" id=4]
-[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=5]
-[ext_resource path="res://Player/Assets/player4.png" type="Texture" id=6]
-[ext_resource path="res://Player/Assets/player10.png" type="Texture" id=7]
-[ext_resource path="res://Player/Assets/player8.png" type="Texture" id=8]
-[ext_resource path="res://Player/Assets/player5.png" type="Texture" id=9]
-[ext_resource path="res://Player/Assets/player3.png" type="Texture" id=10]
-[ext_resource path="res://Player/Assets/player6.png" type="Texture" id=11]
-[ext_resource path="res://Player/Assets/player9.png" type="Texture" id=12]
+[ext_resource path="res://Player/Assets/player10.png" type="Texture" id=5]
+[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=6]
+[ext_resource path="res://Player/Assets/player4.png" type="Texture" id=7]
+[ext_resource path="res://Player/Assets/player3.png" type="Texture" id=8]
+[ext_resource path="res://Player/Assets/player6.png" type="Texture" id=9]
+[ext_resource path="res://Player/Assets/player9.png" type="Texture" id=10]
+[ext_resource path="res://Player/Assets/player8.png" type="Texture" id=11]
+[ext_resource path="res://Player/Assets/player5.png" type="Texture" id=12]
 [ext_resource path="res://Fonts/assets/GreenFlame.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://Player/Assets/text_light.png" type="Texture" id=14]
 [ext_resource path="res://Player/Assets/light.png" type="Texture" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
-height = 11.4614
+height = 14.0
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -29,12 +29,32 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 5 ) ],
 "loop": true,
-"name": "firing_up",
-"speed": 5.0
+"name": "dead",
+"speed": 1.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
+"name": "firing_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
 "name": "falling",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "walking",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "firing",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "accelerating_fall",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 3 ) ],
@@ -42,35 +62,15 @@ animations = [ {
 "name": "none",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
-"name": "dead",
-"speed": 1.0
-}, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "firing_down",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 12 ) ],
 "loop": true,
 "name": "jumping",
 "speed": 2.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "walking",
-"speed": 16.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": true,
-"name": "firing",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ) ],
-"loop": true,
-"name": "accelerating_fall",
-"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=3]
@@ -85,6 +85,7 @@ script = ExtResource( 1 )
 Bullet = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

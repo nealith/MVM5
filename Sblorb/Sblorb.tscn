@@ -52,7 +52,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "red_default"
-frame = 1
 playing = true
 
 [node name="ActivationArea" type="Area2D" parent="."]

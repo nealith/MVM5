@@ -82,7 +82,6 @@ func create_screen(pos : Vector2):
 	return [pos,"screen"]
 	
 func use_hatch():
-	print ("use hatch")
 	if current_hatch != null:
 		var destination = hatchs_link[current_hatch]
 		player.global_position = destination*32 + Vector2(16,16)
@@ -170,7 +169,6 @@ func _ready():
 	player.connect("use_hatch",self,"use_hatch")
 	
 	for i in observationlight_tiles:
-		print (i)
 		var l = ObservationLight.instance()
 		l.global_position = i*32 + Vector2(16,32)
 		add_child(l)
