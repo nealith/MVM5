@@ -4,6 +4,8 @@ export (PackedScene) var Bullet
 
 export (String) var up = "ui_up"
 export (String) var down = "ui_down"
+export (String) var up2 = "ui_up_2"
+export (String) var down2 = "ui_down_2"
 export (String) var left = "ui_left"
 export (String) var right = "ui_right"
 export (String) var action = "ui_action"
@@ -22,7 +24,9 @@ enum S { #status
 	ILeft, # I stand for input
 	IRight,
 	IUp,
+	IUp2,
 	IDown,
+	IDown2,
 	IFiring,
 	ICommand,
 	INone,
@@ -149,7 +153,9 @@ func _inputs_process(delta):
 		S.ILeft : false,
 		S.IRight : false,
 		S.IUp : false,
+		S.IUp2 : false,
 		S.IDown : false,
+		S.IDown2 : false,
 		S.ICommand : false
 	}
 	
@@ -168,6 +174,11 @@ func _inputs_process(delta):
 	elif Input.is_action_pressed(down):
 		istatus[S.IDown] = true
 		
+	if Input.is_action_pressed(up2):
+		istatus[S.IUp2] = true
+	elif Input.is_action_pressed(down2):
+		istatus[S.IDown2] = true
+		
 	if Input.is_action_just_pressed(command):
 		istatus[S.ICommand] = true
 		if command_av:
@@ -178,7 +189,7 @@ func _inputs_process(delta):
 func _xvelocity_process(delta):
 	var stop = true
 
-	if istatus[S.ILeft] and not istatus[S.IFiring] :
+	if istatus[S.ILeft]:
 		if velocity.x <= WALK_MIN_SPEED and velocity.x > -WALK_MAX_SPEED:
 			if cstatus == S.CWall:
 				force.x -= WALL_WALK_FORCE
@@ -187,7 +198,7 @@ func _xvelocity_process(delta):
 				force.x -= WALK_FORCE
 			stop = false
 
-	elif istatus[S.IRight] and not istatus[S.IFiring]:
+	elif istatus[S.IRight]:
 		if velocity.x >= -WALK_MIN_SPEED and velocity.x < WALK_MAX_SPEED:
 			if cstatus == S.CWall:
 				force.x += WALL_WALK_FORCE
@@ -231,7 +242,7 @@ func _yvelocity_process(delta):
 		on_air_time += delta
 				
 
-	elif (pstatus == S.PIdle or pstatus == S.PWalking) and istatus[S.IUp] and not istatus[S.IFiring]:
+	elif (pstatus == S.PIdle or pstatus == S.PWalking) and istatus[S.IUp]:
 		if on_air_time < JUMP_MAX_AIRBORNE_TIME:
 			if not prev_jump_pressed:
 				# Jump must also be allowed to happen if the character left the floor a little bit ago.
@@ -248,28 +259,41 @@ func _change_animation(animation):
 	if $AnimatedSprite.animation != animation:
 		$AnimatedSprite.animation = animation 
 		$AnimatedSprite.playing = true
+		
+func _change_firing_animation(animation):
+	if $AnimatedSprite2.animation != animation:
+		$AnimatedSprite2.animation = animation 
+		$AnimatedSprite2.playing = true
 	
 func _animate(delta):
 	if lstatus == S.LLeft:
 		$AnimatedSprite.flip_h = true
+		$AnimatedSprite2.flip_h = true
 	else:
 		$AnimatedSprite.flip_h = false
+		$AnimatedSprite2.flip_h = false
 
 	
 	if istatus[S.IFiring]:
-		if istatus[S.IUp]:
-			_change_animation("firing_up")
+		if istatus[S.IUp2]:
+			_change_firing_animation("firing_up")
 			firing_direction = "up"
-		elif istatus[S.IDown]:
-			_change_animation("firing_down")
+		elif istatus[S.IDown2]:
+			_change_firing_animation("firing_down")
 			firing_direction = "down"
 		else:
-			_change_animation("firing")
+			_change_firing_animation("firing")
 			if lstatus == S.LLeft:
 				firing_direction = "left"
 			else:
 				firing_direction = "right"
-	elif pstatus == S.PIdle:
+	else:
+		if pstatus == S.PJumping or pstatus == S.PFalling or pstatus == S.PAcceleratingFall:
+			_change_firing_animation("default_j")
+		else:
+			_change_firing_animation("default")
+	
+	if pstatus == S.PIdle:
 		_change_animation("idle")
 	elif pstatus == S.PFalling:
 		_change_animation("falling")
@@ -297,9 +321,9 @@ func _physics_process(delta):
 		if(collision.normal.y < 0):
 			cstatus = S.CFloor
 			on_air_time = 0
-		elif(collision.normal.y > 0 and collision.normal.x < 0.1 and collision.normal.x > -0.1):
+		elif(collision.normal.y > 0):
 			cstatus = S.CCeil
-		elif(collision.normal.x > 0.9 or collision.normal.x < -0.9 and collision.normal.y < 0.1):
+		elif(collision.normal.x > 0 or collision.normal.x < 0):
 			cstatus = S.CWall
 			on_air_time = 0
 		else:

@@ -1,20 +1,22 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Bullets/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Assets/player1.png" type="Texture" id=3]
 [ext_resource path="res://Player/Assets/player2.png" type="Texture" id=4]
-[ext_resource path="res://Player/Assets/player10.png" type="Texture" id=5]
-[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=6]
-[ext_resource path="res://Player/Assets/player4.png" type="Texture" id=7]
-[ext_resource path="res://Player/Assets/player3.png" type="Texture" id=8]
-[ext_resource path="res://Player/Assets/player6.png" type="Texture" id=9]
-[ext_resource path="res://Player/Assets/player9.png" type="Texture" id=10]
-[ext_resource path="res://Player/Assets/player8.png" type="Texture" id=11]
-[ext_resource path="res://Player/Assets/player5.png" type="Texture" id=12]
-[ext_resource path="res://Fonts/assets/GreenFlame.ttf" type="DynamicFontData" id=13]
-[ext_resource path="res://Player/Assets/text_light.png" type="Texture" id=14]
-[ext_resource path="res://Player/Assets/light.png" type="Texture" id=15]
+[ext_resource path="res://Player/Assets/player7.png" type="Texture" id=5]
+[ext_resource path="res://Player/Assets/player4.png" type="Texture" id=6]
+[ext_resource path="res://Player/Assets/player3.png" type="Texture" id=7]
+[ext_resource path="res://Player/Assets/player6.png" type="Texture" id=8]
+[ext_resource path="res://Player/Assets/player5.png" type="Texture" id=9]
+[ext_resource path="res://Player/Assets/player_weapon1.png" type="Texture" id=10]
+[ext_resource path="res://Player/Assets/player_weapon5.png" type="Texture" id=11]
+[ext_resource path="res://Player/Assets/player_weapon3.png" type="Texture" id=12]
+[ext_resource path="res://Player/Assets/player_weapon4.png" type="Texture" id=13]
+[ext_resource path="res://Player/Assets/player_weapon2.png" type="Texture" id=14]
+[ext_resource path="res://Fonts/assets/GreenFlame.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://Player/Assets/text_light.png" type="Texture" id=16]
+[ext_resource path="res://Player/Assets/light.png" type="Texture" id=17]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
@@ -34,25 +36,15 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
-"name": "firing_up",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ) ],
-"loop": true,
 "name": "falling",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "walking",
 "speed": 16.0
 }, {
-"frames": [ ExtResource( 9 ) ],
-"loop": true,
-"name": "firing",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "accelerating_fall",
 "speed": 5.0
@@ -62,6 +54,19 @@ animations = [ {
 "name": "none",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "jumping",
+"speed": 2.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "firing_down",
@@ -69,13 +74,23 @@ animations = [ {
 }, {
 "frames": [ ExtResource( 12 ) ],
 "loop": true,
-"name": "jumping",
-"speed": 2.0
+"name": "firing",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "firing_up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "default_j",
+"speed": 5.0
 } ]
 
 [sub_resource type="DynamicFont" id=3]
 use_mipmaps = true
-font_data = ExtResource( 13 )
+font_data = ExtResource( 15 )
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 1
@@ -97,8 +112,12 @@ drag_margin_v_enabled = false
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "idle"
-frame = 3
+frame = 1
 playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+animation = "firing_down"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 visible = false
@@ -115,7 +134,7 @@ tab_size = 3
 
 [node name="Light2D" type="Light2D" parent="RichTextLabel"]
 position = Vector2( 150, 30 )
-texture = ExtResource( 14 )
+texture = ExtResource( 16 )
 energy = 3.0
 range_z_min = -1
 range_z_max = 1
@@ -125,7 +144,7 @@ range_item_cull_mask = 2
 color = Color( 0.152941, 0.152941, 0.152941, 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-texture = ExtResource( 15 )
+texture = ExtResource( 17 )
 color = Color( 0.647059, 0.803922, 1, 1 )
 range_z_min = -5
 range_z_max = 5
