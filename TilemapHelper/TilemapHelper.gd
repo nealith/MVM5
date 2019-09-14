@@ -7,6 +7,9 @@ extends Node
 export (PackedScene) var TileArea
 export (PackedScene) var ObservationLight
 export (PackedScene) var RedLight
+export (PackedScene) var DoorSound
+export (PackedScene) var HatchSound
+export (PackedScene) var ScreenSound
 
 signal command_available()
 signal command_unavailable()
@@ -50,8 +53,11 @@ onready var observationlight_tiles : Array = tilemap.get_used_cells_by_id(10)
 
 
 var doors : Dictionary = {}
+var doors_sound : Dictionary = {}
 var screens : Dictionary = {}
+var screens_sound : Dictionary = {}
 var hatchs : Dictionary = {}
+var hatchs_sound : Dictionary = {}
 
 var hatchs_link : Dictionary = {}
 
@@ -72,13 +78,25 @@ func create_area(pos : Vector2) -> Area2D:
 
 func create_hatch(pos : Vector2):
 	hatchs[pos] = false
+	hatchs_sound[pos] = HatchSound.instance()
+	hatchs_sound[pos].global_position = pos*32
+	hatchs_sound[pos].get_node("sound").connect("finished",self,"toogle_hatch",[pos])
+	add_child(hatchs_sound[pos])
 	return [pos,"hatch"]
 	
 func create_door(pos : Vector2):
 	doors[pos] = false
+	doors_sound[pos] = DoorSound.instance()
+	doors_sound[pos].global_position = pos*32
+	doors_sound[pos].get_node("sound").connect("finished",self,"toogle_door",[pos])
+	add_child(doors_sound[pos])
 	return [pos,"door"]
 	
 func create_screen(pos : Vector2):
+	screens_sound[pos] = ScreenSound.instance()
+	screens_sound[pos].global_position = pos*32
+	screens_sound[pos].get_node("sound").connect("finished",self,"toogle_screen",[pos])
+	add_child(screens_sound[pos])
 	return [pos,"screen"]
 	
 func use_hatch():
@@ -123,11 +141,11 @@ func toogle_screen(pos):
 	
 func toogle(pos,type):
 	if type == "hatch":
-		toogle_hatch(pos) 
+		hatchs_sound[pos].get_node("sound").play()
 	elif type == "door":
-		toogle_door(pos)
+		doors_sound[pos].get_node("sound").play()
 	elif type == "screen":
-		toogle_screen(pos)
+		screens_sound[pos].get_node("sound").play()
 		
 func toogle_command():
 	toogle(current_command_pos,current_command_type)

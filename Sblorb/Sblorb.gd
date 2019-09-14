@@ -112,10 +112,12 @@ func _on_AnimatedSprite_animation_finished():
 func _on_ActivationArea_body_entered(body):
 	if body != null and not body.get("I") == null:
 		if body.I == "player":
+			$AudioStreamPlayer2D.playing = true
 			emit_signal("finish_move",self)
 
 
 func _on_ActivationArea_body_exited(body):
 	if body != null and not body.get("I") == null:
 		if body.I == "player":
+			$AudioStreamPlayer2D.playing = false
 			set_process(false)

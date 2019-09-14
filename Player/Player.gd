@@ -216,6 +216,7 @@ func _xvelocity_process(delta):
 			vlen = 0
 			if cstatus == S.CFloor or cstatus == S.CWall:
 				pstatus = S.PIdle
+				$walking.playing = false
 		else:
 			if cstatus == S.CFloor or cstatus == S.CWall:
 				pstatus = S.PWalking
@@ -225,6 +226,8 @@ func _xvelocity_process(delta):
 	else:
 		if cstatus == S.CFloor or cstatus == S.CWall:
 			pstatus = S.PWalking
+			if not $walking.playing:
+				$walking.playing = true
 	
 func _yvelocity_process(delta):
 	if pstatus == S.PJumping and velocity.y > 0:
@@ -245,6 +248,7 @@ func _yvelocity_process(delta):
 	elif (pstatus == S.PIdle or pstatus == S.PWalking) and istatus[S.IUp]:
 		if on_air_time < JUMP_MAX_AIRBORNE_TIME:
 			if not prev_jump_pressed:
+				$jump.playing = true
 				# Jump must also be allowed to happen if the character left the floor a little bit ago.
 				# Makes controls more snappy.
 				if cstatus == S.CWall:

@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Main/Main.gd" type="Script" id=1]
 [ext_resource path="res://Levels/BaseLevel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://TilemapHelper/ObservationLight.tscn" type="PackedScene" id=3]
 [ext_resource path="res://TilemapHelper/RedLight.tscn" type="PackedScene" id=4]
-[ext_resource path="res://TilemapHelper/SpecialDoorCommand.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://TilemapHelper/DoorSound.tscn" type="PackedScene" id=5]
+[ext_resource path="res://TilemapHelper/HatchSound.tscn" type="PackedScene" id=6]
+[ext_resource path="res://TilemapHelper/ScreenSound.tscn" type="PackedScene" id=7]
+[ext_resource path="res://TilemapHelper/SpecialDoorCommand.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=9]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -18,14 +21,17 @@ tile_data = PoolIntArray( -524285, 46, 0, -524284, 49, 0, -524283, 49, 0, -52428
 [node name="TilemapHelper" parent="BaseLevel/LevelTileMap" index="0"]
 ObservationLight = ExtResource( 3 )
 RedLight = ExtResource( 4 )
+DoorSound = ExtResource( 5 )
+HatchSound = ExtResource( 6 )
+ScreenSound = ExtResource( 7 )
 player_exp = NodePath("../../../Player")
 screens_text = {
-Vector2( -5, -1 ): "Hello, I'm a panel command, by pressing \"x\", I trigger something like a door, a hatch or the screen that is showing you this message",
+Vector2( -5, -1 ): "Hello, I'm a panel command, by pressing \"f\", I trigger something like a door, a hatch or the screen that is showing you this message",
 Vector2( 17, 32 ): "All these things, that's stange, I shoud reach the main reactor as soos as possible",
 Vector2( 19, 9 ): "Don't forget to look down too",
 Vector2( 22, 62 ): "Procedure : trigger the 4 command panels",
 Vector2( 23, 1 ): "That' strange there are no lights, maybe the main reactor is off ...",
-Vector2( 25, 12 ): "Don't forget to look up, if you see something, press \"space\" and after \"up\"",
+Vector2( 25, 12 ): "Don't forget to look up, if you see something, press \"space\" and \"up\"",
 Vector2( 26, 22 ): "Article 32.E of Galatical Species Convention allow you to fire by pressing \"space\" on hostil creatures that are unable to communicate with you",
 Vector2( 39, 39 ): "Status : Locked",
 Vector2( 39, 59 ): null,
@@ -37,11 +43,11 @@ Vector2( 59, 39 ): "Status : Locked",
 Vector2( 64, 39 ): "Procedure  :Trigger both command panels in secondary reactor main room"
 }
 
-[node name="SpecialDoorCommand" parent="BaseLevel/LevelTileMap/TilemapHelper" index="0" instance=ExtResource( 5 )]
+[node name="SpecialDoorCommand" parent="BaseLevel/LevelTileMap/TilemapHelper" index="0" instance=ExtResource( 8 )]
 position = Vector2( 2864, 176 )
 position_of_door = Vector2( 36, 40 )
 
-[node name="SpecialDoorCommand2" parent="BaseLevel/LevelTileMap/TilemapHelper" index="1" instance=ExtResource( 5 )]
+[node name="SpecialDoorCommand2" parent="BaseLevel/LevelTileMap/TilemapHelper" index="1" instance=ExtResource( 8 )]
 position = Vector2( 2992.08, 176.025 )
 position_of_door = Vector2( 62, 40 )
 
@@ -58,8 +64,8 @@ tile_data = PoolIntArray( -393212, 11, 0, 14, 11, 0, 131098, 12, 0, 393239, 12, 
 [node name="SblorbSpawner" parent="BaseLevel" index="4"]
 player_exp = NodePath("../../Player")
 
-[node name="Player" parent="." instance=ExtResource( 6 )]
-position = Vector2( -256.839, 14.4487 )
+[node name="Player" parent="." instance=ExtResource( 9 )]
+position = Vector2( -259.742, 4.10437 )
 [connection signal="dead" from="Player" to="." method="_on_Player_dead"]
 
 [editable path="BaseLevel"]

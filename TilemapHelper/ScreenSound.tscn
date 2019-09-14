@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sfx/screen_on.wav" type="AudioStream" id=1]
+
+[node name="ScreenSound" type="Node2D"]
+
+[node name="sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+max_distance = 80.0
