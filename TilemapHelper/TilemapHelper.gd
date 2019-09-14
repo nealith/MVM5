@@ -107,11 +107,13 @@ func toogle_door(pos):
 		tilemap.set_cell(pos.x,pos.y-1,door_closed_top_id)
 		navtilemap.set_cellv(pos,-1)
 		navtilemap.set_cell(pos.x,pos.y-1,-1)
+		emit_signal("show_screen_message","Door closed")
 	else:
 		tilemap.set_cellv(pos,door_open_bottom_id)
 		tilemap.set_cell(pos.x,pos.y-1,door_open_top_id)
 		navtilemap.set_cellv(pos,door_nav_tile)
 		navtilemap.set_cell(pos.x,pos.y-1,door_nav_tile)
+		emit_signal("show_screen_message","Door open")
 	
 	navtilemap.update_bitmask_area(pos)	
 	doors[pos] = !doors[pos]
